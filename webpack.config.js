@@ -5,18 +5,22 @@ const webpack = require('webpack');
 
 module.exports = {
     context: __dirname + '/app',
-    entry: './landing',
+    entry: './app',
+
     output: {
         path: __dirname + '/dist',
         publicPath: '/dist/',
         filename: '[name].js',
         library: '[name]'
     },
+
     watch: NODE_ENV == 'develop',
     watchOptions: {
         aggregateTime: 100
     },
+
     devtool: NODE_ENV == 'develop' ? 'inline-source-map' : null,
+
     plugins: [
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({
@@ -28,15 +32,15 @@ module.exports = {
         }) add common js file */
     ],
     module: {
-    loaders: [
-        {
-          test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
-          loader: 'babel', // 'babel-loader' is also a legal name to reference
-          query: {
-            presets: ['es2015']
-          }
-        }
-      ]
+        loaders: [
+            {
+              test: /\.js$/,
+              exclude: /(node_modules|bower_components)/,
+              loader: 'babel?presets[]=es2015,plugins[]=transform-es2015-modules-commonjs',
+              /*query: {
+                presets: ['es2015']
+              }*/
+            }
+        ]
     }
 }

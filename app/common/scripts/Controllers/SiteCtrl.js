@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = function() {
-    console.log(' Click');
+    console.log('CommonCtrl');
 }
